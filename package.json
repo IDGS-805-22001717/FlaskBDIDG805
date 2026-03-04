@@ -1,9 +1,11 @@
 {
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.18",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.2.1"
   },
   "dependencies": {
-    "flowbite": "^4.0.1"
+    "@tailwindcss/postcss": "^4.2.1",
+    "flowbite": "^4.0.1",
+    "postcss": "^8.5.6"
   }
 }

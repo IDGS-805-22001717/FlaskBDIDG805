@@ -1,0 +1,59 @@
+{% extends "layout.html" %} 
+
+{% block container %}
+{% import "_macros.html" as macros %}
+
+<div class="flex items-center justify-center min-h-[80vh] w-full px-4 py-10">
+    <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+        
+        <h2 class="text-2xl font-bold mb-8 text-gray-800 text-center">
+            Crear Nuevo Curso
+        </h2>
+        
+        <form method="POST" class="flex flex-col w-full">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="w-full mb-6">
+                <label for="nombre" class="block mb-2 text-sm font-semibold text-gray-700">
+                    Nombre del Curso
+                </label>
+                <input type="text" name="nombre" id="nombre" required
+                    class="block w-full px-3 py-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" 
+                    placeholder="" />
+            </div>
+
+            <div class="w-full mb-6">
+                <label for="descripcion" class="block mb-2 text-sm font-semibold text-gray-700">
+                    Descripción del Curso
+                </label>
+                <textarea name="descripcion" id="descripcion" rows="3" required
+                    class="block w-full px-3 py-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" 
+                    placeholder="Descripción"></textarea>
+            </div>
+
+            <div class="w-full mb-8">
+                <label for="maestro_id" class="block mb-2 text-sm font-semibold text-gray-700">
+                    Asignar Maestro
+                </label>
+                <select name="maestro_id" id="maestro_id" required
+                    class="block w-full px-3 py-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                    <option value="" disabled selected>Selecciona un maestro</option>
+                    {% for maestro in maestros %}
+                        <option value="{{ maestro.matricula }}">{{ maestro.nombre }} {{ maestro.apellidos }} ({{ maestro.especialidad }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="w-full flex flex-col items-center gap-y-4">
+                <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-5 rounded-xl text-sm transition-all shadow-md active:scale-[0.98]">
+                    Registrar Curso
+                </button>
+                <br>
+                <a href="{{ url_for('cursos.cursos_list') }}" class="text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
